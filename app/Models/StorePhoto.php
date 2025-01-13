@@ -14,4 +14,6 @@ class StorePhoto extends Model
         'photo',
         'car_store_id',
     ];
+
+    
 }

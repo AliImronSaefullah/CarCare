@@ -4,6 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class CarStore extends Model
@@ -22,4 +25,25 @@ class CarStore extends Model
         'phone_number',
         'cs_name',
     ];
+
+    public function setNameAttribute ($value)
+    {
+        $this->attributes['name'] = $value;
+        $this->attributes['slug'] = str::slug($value);
+    }
+
+    public function storeServices (): HasMany
+    {
+        return $this->hasMany(StoreService::class, 'car_store_id');
+    }
+
+    public function photos (): HasMany
+    {
+        return $this->hasMany(StorePhoto::class, 'car_store_id');
+    }
+
+    public function city (): BelongsTo
+    {
+        return $this->belongsTo(City::class, 'city_id');
+    }
 }
