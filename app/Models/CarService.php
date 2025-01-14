@@ -18,7 +18,8 @@ class CarService extends Model
         'slug',
         'about',
         'photo',
-        'duration_in_hours',
+        'icon',
+        'duration_in_hour',
     ];
 
     public function setNameAttribute ($value)
